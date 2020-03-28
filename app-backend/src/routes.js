@@ -17,10 +17,10 @@ routes.post('/session', celebrate({
 routes.get('/ongs', OngController.index);
 
 routes.post('/ongs', celebrate({
-    [Segments.BODY] : Joi.object().keys4({
+    [Segments.BODY] : Joi.object().keys({
         name: Joi.string().required(),
         email: Joi.string().required().email(),
-        whatsapp: Joi.numer().required().min(10).max(11),
+        whatsapp: Joi.string().required().min(9).max(11),
         city: Joi.string().required(),
         uf: Joi.string().required().length(2),
     })
@@ -39,11 +39,11 @@ routes.post('/incidents', celebrate({
     [Segments.BODY] : Joi.object().keys({
         title: Joi.string().required(),
         description: Joi.string().required().email(),
-        vlaue: Joi.numer().required()
+        vlaue: Joi.number().required()
     })
 }), IncidentsController.create);
 
-routes.get('/incidents', clebrate({
+routes.get('/incidents', celebrate({
     [Segments.QUERY]: Joi.object().keys({
         page: Joi.number(),
     })
